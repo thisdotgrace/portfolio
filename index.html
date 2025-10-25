@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="logo" href="#">
+                < thisdotgrace />
+            </a>
+            <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav id="primary-nav" class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="hero">
+            <div class="post-it-note note note-green" style="--note-rot:-4deg; --note-h: 350px;">
+                <div class="pin" aria-hidden="true">
+                    <span class="pin-head"></span>
+                    <span class="pin-stem"></span>
+                </div>
+                <div class="hero-content">
+                    <h1> Welcome! </h1>
+                    <p> I'm <strong>
+                            < thisdotgrace />
+                        </strong>.
+                        <br>
+                        A student software developer and freelancer.
+                        <br><br>
+                        Check out my projects, socials and feel free to reach out!
+                    </p>
+                </div>
+
+            </div>
+
+
+            <figure class="polaroid">
+                <!-- single pin centered on the polaroid -->
+                <div class="pin" aria-hidden="true">
+                    <span class="pin-head"></span>
+                    <span class="pin-stem"></span>
+                </div>
+                <img class="polaroid-img" src="assets/avatar.png" alt="Polaroid Picture" />
+                <figcaption>This is me! 😎</figcaption>
+            </figure>
+        </div>
+
+        <div class="title-container">
+            <h2 id="projects" class="note-title note-title-taped">My Projects</h2>
+        </div>
+
+        <!-- Responsive notes grid -->
+        <section class="notes-grid container" aria-label="Notes">
+            <div class="grid">
+                <article class="post-it-note note note-blue" style="--note-rot:-2deg;">
+                    <div class="pin" aria-hidden="true"><span class="pin-head"></span><span class="pin-stem"></span>
+                    </div>
+                    <h3>My portfolio website</h3>
+                    <p>This website is done with pure HTML, CSS and Javascript! </p>
+                        <div class="note-stickers" aria-hidden="false">
+                            <a class="sticker" href="https://github.com/" target="_blank" rel="noopener" aria-label="View on GitHub">
+                                <img src="assets/github-icon.png" alt="Github Icon" style="width: 20px">
+                            </a>
+                            <a class="sticker sticker--small" href="https://reactjs.org/" target="_blank" rel="noopener" aria-label="React">
+                                <img src="assets/react.png" alt="React Logo" style="width: 20px" />
+                            </a>
+                        </div>
+                </article>
+                <article class="post-it-note note note-gold">
+                    <div class="pin" aria-hidden="true"><span class="pin-head"></span><span class="pin-stem"></span>
+                    </div>
+                    <h3 class="">Piggy Bank Clicker</h3>
+                    <p>A project built in React, a simple clicker game where you can earn coins to unlock cool costumes and upgrades.</p>
+                </article>
+                <article class="post-it-note note note-pink" style="--note-rot:3deg">
+                    <div class="pin" aria-hidden="true"><span class="pin-head"></span><span class="pin-stem"></span>
+                    </div>
+                    <h3>The Plough Inn Redesign</h3>
+                    <p>A redesign project for a local pub's website, focusing on user experience and modern aesthetics.</p>
+                </article>
+                <article class="post-it-note note note-green">
+                    <div class="pin" aria-hidden="true"><span class="pin-head"></span><span class="pin-stem"></span>
+                    </div>
+                    <h3>Ellivate Tutoring</h3>
+                    <p>A simple wordpress website for a tutoring service.</p>
+                </article>
+                <article class="post-it-note note note-greenyellow">
+                    <div class="pin" aria-hidden="true"><span class="pin-head"></span><span class="pin-stem"></span>
+                    </div>
+                    <h3>Coming soon...</h3>
+                </article>
+                <article class="post-it-note note note-purple">
+                    <div class="pin" aria-hidden="true"><span class="pin-head"></span><span class="pin-stem"></span>
+                    </div>
+                    <h3>Coming soon...</h3>
+                </article>
+            </div>
+        </section>
+
+        <section class="notebook-page">
+
+        </section>
+
+    </main>
+
+    <div class="title-container">
+        <h2 id="about" class="note-title note-title-taped">About Me</h2>
+    </div>
+
+
+    <section id="contact" class="contact-section container" aria-label="Contact">
+        <div class="notebook-sheet">
+            <div class="pin" aria-hidden="true">
+                <span class="pin-head"></span>
+                <span class="pin-stem"></span>
+            </div>
+
+            <h2 class="note-title">Contact</h2>
+            <div class="notebook-lines">
+                <p class="contact-item"><strong>Email:</strong>
+                    <a href="mailto:programmingwithgrace@gmail.com">programmingwithgrace@gmail.com</a>
+                </p>
+                <p class="contact-item"><strong>Location:</strong> South Yorkshire, UK</p>
+                <p class="contact-item"><strong>Availability:</strong> Open to new projects </p>
+
+                <p class="contact-note">
+                    If you'd like to contact me, drop me a line at the email above
+                    or connect on LinkedIn — I aim to reply within 2 business days.
+                </p>
+            </div>
+        </div>
+
+        <aside class="social-column" aria-label="Social links">
+            <a class="pinned-icon" href="https://www.linkedin.com/" target="_blank" rel="noopener"
+                aria-label="LinkedIn">
+                <div class="pin"><span class="pin-head"></span><span class="pin-stem"></span></div>
+                <img class="icon linkedin-icon" src="assets/linkedin-icon.png" style="width: 30px;" alt="LinkedIn Logo">
+            </a>
+            <a class="pinned-icon" href="https://github.com/thisdotgrace" target="_blank" rel="noopener" aria-label="GitHub">
+                <div class="pin"><span class="pin-head"></span><span class="pin-stem"></span></div>
+                <img class="icon github-icon" src="assets/github-icon.png" style="width: 30px;" alt="GitHub Logo">
+            </a>
+            <a class="pinned-icon" href="mailto:hello@yourdomain.com" aria-label="Email">
+                <div class="pin"><span class="pin-head"></span><span class="pin-stem"></span></div>
+                <img class="icon email-icon" src="assets/gmail.png" style="width: 30px;" alt="Email Logo">
+            </a>
+        </aside>
+    </section>
+
+
+    <script>
+        (function () {
+            const btn = document.querySelector('.nav-toggle');
+            const nav = document.getElementById('primary-nav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', () => {
+                const isOpen = nav.classList.toggle('open');
+                btn.setAttribute('aria-expanded', String(isOpen));
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

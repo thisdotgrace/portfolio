@@ -1,0 +1,577 @@
+/* -----------------------------------------------------
+   RESET & BASE
+----------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'PatrickHand', sans-serif;
+  line-height: 1.45;
+  color: #222;
+  background: url('assets/corkboard.jpg') center/cover no-repeat fixed;
+}
+
+h3 {
+  font-family: 'AnkaCoderRegular', sans-serif;
+}
+
+/* -----------------------------------------------------
+   FONTS
+----------------------------------------------------- */
+@font-face {
+  font-family: 'AnkaCoderRegular';
+  src: url('assets/fonts/AnkaCoder-b.ttf');
+}
+
+@font-face {
+  font-family: 'PatrickHand';
+  src: url('assets/fonts/PatrickHand-Regular.ttf');
+}
+
+/* -----------------------------------------------------
+   ROOT VARIABLES
+----------------------------------------------------- */
+:root {
+  /* Colour palette */
+  --note-yellow: #fff1b8;
+  --note-blue: #48bfe9;
+  --note-orange: #ff8b3e;
+  --note-green: #7ad27c;
+  --note-gold: #fec919;
+  --tape-gray: #dbd8be;
+  --tape-edge-gray: #b7b49d;
+
+  /* Note defaults */
+  --note-w-default: 220px;
+  --note-h-default: auto;
+  --note-rot-default: 0deg;
+
+  /* Pins & Polaroid */
+  --pin-head-gradient: radial-gradient(circle at 30% 30%, #ff6b6b, #d93b3b);
+  --polaroid-border: #fff;
+  --polaroid-shadow: #dadada;
+}
+
+/* -----------------------------------------------------
+   LAYOUT CONTAINERS
+----------------------------------------------------- */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0.75rem;
+}
+
+/* -----------------------------------------------------
+   HEADER & NAVIGATION
+----------------------------------------------------- */
+.site-header {
+  background-color: #7ad27c;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-family: 'AnkaCoderRegular';
+}
+
+.header-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "logo navtoggle"
+    "nav nav";
+  gap: 0.4rem 0.75rem;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.logo {
+  grid-area: logo;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Hamburger button (shown on mobile) */
+.nav-toggle {
+  grid-area: navtoggle;
+  display: inline-block;
+  background: transparent;
+  border: 0;
+  padding: 0.25rem;
+  cursor: pointer;
+  justify-self: end;
+}
+
+.nav-toggle:focus {
+  outline: 2px solid rgba(0,0,0,0.12);
+  border-radius: 4px;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  width: 26px;
+  height: 2px;
+  background: #222;
+  content: '';
+  display: block;
+  position: relative;
+}
+
+.hamburger::before { position: absolute; top: -7px; }
+.hamburger::after  { position: absolute; top: 7px; }
+
+/* Nav (hidden by default on mobile) */
+#primary-nav {
+  grid-area: nav;
+  display: none;
+  width: 100%;
+}
+
+#primary-nav.open { display: block; }
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: inherit;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.main-nav a:hover,
+.main-nav a:focus {
+  background: rgba(255,255,255,0.2);
+}
+
+/* -----------------------------------------------------
+   HERO SECTION
+----------------------------------------------------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  margin: 1rem 0;
+}
+
+.hero strong {
+  font-family: 'AnkaCoderRegular';
+  font-size: 1.25rem;
+  font-weight: bold;
+  background-color: rgba(228, 110, 55, 0.584);
+  margin: 0.25rem;
+  padding: 0 0.25rem;
+}
+
+.hero-content {
+  margin: 1rem;
+}
+
+/* -----------------------------------------------------
+   POST-IT NOTES
+----------------------------------------------------- */
+.post-it-note {
+  --note-bg: var(--note-yellow);
+  --note-w: var(--note-w-default);
+  --note-h: var(--note-h-default);
+  --note-rot: var(--note-rot-default);
+
+  position: relative;
+  padding: 0.75rem;
+  background-color: var(--note-bg);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+  transform: rotate(var(--note-rot));
+  width: var(--note-w);
+  height: var(--note-h);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+/* Pin */
+.pin {
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.pin-head {
+  width: 18px;
+  height: 18px;
+  background: var(--pin-head-gradient);
+  border-radius: 50%;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+}
+
+.pin-stem {
+  width: 2px;
+  height: 12px;
+  background: linear-gradient(#e6e6e6, #bdbdbd);
+  margin-top: 2px;
+  border-radius: 1px;
+}
+
+/* -----------------------------------------------------
+   POLAROID
+----------------------------------------------------- */
+.polaroid {
+  position: relative;
+  background-color: var(--polaroid-border);
+  padding: 0.75rem 0.75rem 1.75rem;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 2px 2px 3px var(--polaroid-shadow);
+  border-radius: 4px;
+  transform: rotate(3deg);
+  z-index: 2;
+}
+
+.polaroid > .pin {
+  top: -10px;
+}
+
+.polaroid-img {
+  width: 4.5rem;
+  display: block;
+  object-fit: cover;
+  border: 6px solid #fff;
+  background-color: black;
+}
+
+.polaroid figcaption {
+  margin-top: 0.5rem;
+  color: #222;
+  text-align: center;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+
+/* -----------------------------------------------------
+   NOTES GRID
+----------------------------------------------------- */
+.note-title {
+  font-family: 'AnkaCoderRegular', sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.title-container {
+  text-align: center;
+  padding-top: 4rem;
+}
+
+.note-title-taped {
+  display: inline-block;
+  background: rgba(255,255,255,0.9);
+  padding: 1rem 0.9rem;
+  width: 300px;
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.note-title-taped::before {
+  /* a strip of tape above the title */
+  content: "";
+  display: block;
+  width: 160px;
+  height: 26px;
+  background-color: var(--tape-gray);
+  border-left: 1px dotted var(--tape-edge-gray);
+  border-right: 1px dotted var(--tape-edge-gray);
+  opacity: 0.85;
+  position: absolute;
+  left: 50%;
+  top: -14px;
+  transform: translateX(-50%) rotate(-2deg);
+  box-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.18);
+}
+
+.grid {
+    height: 500px;
+}
+
+.notes-grid .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-top: 2rem;
+  padding: 0 0.75rem;
+}
+
+.notes-grid .post-it-note.note {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+}
+
+/* small sticker badges that sit in the bottom-right of a note */
+.note-stickers {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  z-index: 4; /* above note content but below any pins */
+  padding: 10px;
+}
+
+.note-stickers .sticker {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.95);
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  text-decoration: none;
+  color: #222;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.note-stickers .sticker:hover,
+.note-stickers .sticker:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+
+/* -----------------------------------------------------
+   CONTACT SECTION AND PINNED ICONS
+----------------------------------------------------- */
+
+/* CONTACT SECTION LAYOUT */
+.contact-section {
+  display: grid;
+  grid-template-columns: 1fr; /* stack on mobile */
+  margin-top: 4rem;
+  align-items: center;
+}
+
+/* The "paper" look for notebook */
+.notebook-sheet {
+  position: relative;
+  background: #fff url('assets/lined-paper-bg.png') repeat-y;
+  background-size: contain;
+  border: 1px solid #ddd;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  padding: 2rem 2rem 2.5rem 3rem;
+  border-radius: 6px;
+  max-width: 700px;
+  transform: rotate(-1.2deg);
+}
+
+.notebook-sheet::before {
+  /* vertical red margin line */
+  content: '';
+  position: absolute;
+  left: 2.2rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 90, 90, 0.7);
+}
+
+.notebook-lines p {
+  margin-bottom: 0.75rem;
+}
+
+.contact-item a {
+  color: #222;
+  text-decoration: underline dotted;
+}
+
+.note-subtitle {
+  margin-top: 1rem;
+  font-family: 'AnkaCoderRegular', sans-serif;
+  font-size: 1.15rem;
+}
+
+.social-column {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.pinned-icon {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 75px;
+  height: 75px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.18);
+  text-decoration: none;
+  color: #222;
+  transform: rotate(0deg);
+  transition: transform 0.15s ease;
+}
+
+.pinned-icon:hover {
+  transform: rotate(3deg) scale(1.05);
+}
+
+.pinned-icon .pin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* -----------------------------------------------------
+   UTILITY NOTE COLORS
+----------------------------------------------------- */
+.note-yellow { --note-bg: var(--note-yellow); }
+.note-pink   { --note-bg: #ffd6e0; }
+.note-blue   { --note-bg: var(--note-blue); }
+.note-green  { --note-bg: var(--note-green); }
+.note-orange { --note-bg: #f09c00; }
+.note-gold   { --note-bg: var(--note-gold); }
+.note-purple { --note-bg: #c39bd3; }
+
+.note-rot-1left  { --note-rot: -2deg; }
+.note-rot-2left  { --note-rot: -4deg; }
+
+/* -----------------------------------------------------
+   MEDIA QUERIES (progressive enhancement)
+----------------------------------------------------- */
+
+/* Tablet (≥480px) */
+@media (min-width: 480px) {
+  :root {
+    --note-w-default: 300px;
+  }
+
+  .hero {
+    gap: 2rem;
+    padding-top: 2.5rem;
+  }
+
+  .hero p { font-size: 1.25rem; }
+
+  .polaroid-img { width: 12rem; }
+
+  .notes-grid .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+/* Desktop (≥700px) */
+@media (min-width: 700px) {
+  :root {
+    --note-w-default: 400px;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.25rem;
+  }
+
+    /* Header: logo left, nav right */
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-toggle { display: none; }
+  #primary-nav { display: block; }
+
+  .main-nav ul {
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+
+  .logo {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+  }
+
+  .hero {
+    width: 100%;
+    max-width: 1000px;    /* same as .container for consistent centering */
+    margin: 0 auto;       /* center the hero group on the page */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* center children horizontally inside the hero */
+    gap: 8rem;
+    padding-top: 4rem;
+    text-align: left;
+    flex-wrap: nowrap;    /* don't let items wrap/stack */
+    }
+
+  .hero > * {
+    flex: 0 0 auto;
+    margin: 0;
+}
+  
+  .hero p { font-size: 1.5rem; }
+
+
+  .polaroid {
+    transform: rotate(4deg);
+    display: inline-block;
+  }
+
+  .polaroid-img { width: 14rem; }
+
+  .notes-grid .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-section {
+    padding-top: 3rem;
+    grid-template-columns: 80% 20%;
+    align-items: start;
+  }
+
+  .social-column {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 0;
+  }
+
+  .pinned-icon {
+    transform: rotate(-2deg);
+  }
+  
+}
