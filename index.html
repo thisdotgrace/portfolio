@@ -8,10 +8,10 @@
     <title>Document</title>
 </head>
 
-<body>
+<body class="page-home">
     <header class="site-header">
         <div class="container header-inner">
-            <a class="logo" href="#">
+            <a class="logo" href="index.html">
                 < thisdotgrace />
             </a>
             <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,9 +19,10 @@
             </button>
             <nav id="primary-nav" class="main-nav" aria-label="Primary">
                 <ul>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a class="active" href="index.html" aria-current="page">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -56,7 +57,8 @@
                     <span class="pin-head"></span>
                     <span class="pin-stem"></span>
                 </div>
-                <img class="polaroid-img" src="assets/avatar.png" alt="Polaroid Picture" />
+                <img class="polaroid-img" src="assets/avatar.png" alt="Polaroid Picture" draggable="false"
+                    data-images="assets/avatar.png,assets/avatar-alt1.png,assets/avatar-alt2.png" />
                 <figcaption>This is me! 😎</figcaption>
             </figure>
         </div>
@@ -73,14 +75,6 @@
                     </div>
                     <h3>My portfolio website</h3>
                     <p>This website is done with pure HTML, CSS and Javascript! </p>
-                        <div class="note-stickers" aria-hidden="false">
-                            <a class="sticker" href="https://github.com/" target="_blank" rel="noopener" aria-label="View on GitHub">
-                                <img src="assets/github-icon.png" alt="Github Icon" style="width: 20px">
-                            </a>
-                            <a class="sticker sticker--small" href="https://reactjs.org/" target="_blank" rel="noopener" aria-label="React">
-                                <img src="assets/react.png" alt="React Logo" style="width: 20px" />
-                            </a>
-                        </div>
                 </article>
                 <article class="post-it-note note note-gold">
                     <div class="pin" aria-hidden="true"><span class="pin-head"></span><span class="pin-stem"></span>
@@ -163,18 +157,24 @@
         </aside>
     </section>
 
+    <!-- Project note modal: colour is set to match the clicked note via JS -->
+    <div class="note-modal-overlay" id="noteModalOverlay">
+        <div class="note-modal" id="noteModal" role="dialog" aria-modal="true" aria-labelledby="noteModalTitle">
+            <div class="modal-pin-slot" id="modalPinSlot">
+                <div class="pin modal-pin" aria-hidden="true">
+                    <span class="pin-head"></span>
+                    <span class="pin-stem"></span>
+                </div>
+            </div>
+            <button class="modal-close" id="modalClose" type="button" aria-label="Close">&times;</button>
+            <div class="modal-content">
+                <img class="modal-preview" id="modalPreview" src="assets/backgrounds/projects.png" alt="">
+                <div class="modal-body" id="modalBody"></div>
+            </div>
+        </div>
+    </div>
 
-    <script>
-        (function () {
-            const btn = document.querySelector('.nav-toggle');
-            const nav = document.getElementById('primary-nav');
-            if (!btn || !nav) return;
-            btn.addEventListener('click', () => {
-                const isOpen = nav.classList.toggle('open');
-                btn.setAttribute('aria-expanded', String(isOpen));
-            });
-        })();
-    </script>
+    <script src="script.js" defer></script>
 
 </body>
 
