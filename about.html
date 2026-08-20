@@ -28,8 +28,114 @@
         </div>
     </header>
 
-    <main class="page-placeholder container">
-        <h1>About</h1>
+    <main class="about-page container">
+        <section class="about-hero" aria-label="Profile">
+            <div class="about-profile">
+                <figure class="polaroid about-polaroid">
+                    <div class="pin" aria-hidden="true">
+                        <span class="pin-head"></span>
+                        <span class="pin-stem"></span>
+                    </div>
+                    <img class="polaroid-img" src="assets/avatar.png" alt="Grace" draggable="false">
+                    <figcaption>Grace / thisdotgrace</figcaption>
+                </figure>
+
+                <div class="notebook-sheet about-sheet">
+                    <div class="pin" aria-hidden="true">
+                        <span class="pin-head"></span>
+                        <span class="pin-stem"></span>
+                    </div>
+                    <h2 class="note-title">Pinned details</h2>
+                    <div class="notebook-lines">
+                        <p><strong>Based:</strong> South Yorkshire, UK</p>
+                        <p><strong>Currently:</strong> Studying software development</p>
+                        <p><strong>Good at:</strong> thoughtful interfaces, tidy code, and learning out loud</p>
+                        <p class="contact-note">Available for small freelance projects, collaborations, and conversations about making the web a little more human.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cv-board" aria-label="Curriculum vitae pages">
+
+            <div class="cv-paper-stack">
+                <article class="cv-paper cv-paper--active" id="cv-page-1" tabindex="0" data-cv-panel="1">
+                    <button class="cv-peel cv-peel--prev" type="button" data-cv-direction="prev" aria-label="Previous CV page">
+                        <span aria-hidden="true">&#8592;</span>
+                    </button>
+                    <button class="cv-peel cv-peel--next" type="button" data-cv-direction="next" aria-label="Next CV page">
+                        <span aria-hidden="true">&#8594;</span>
+                    </button>
+                    <div class="cv-paper-pin pin" aria-hidden="true"><span class="pin-head"></span><span class="pin-stem"></span></div>
+                    <header class="cv-paper-header">
+                        <div>
+                            <p class="cv-kicker">Grace · software developer</p>
+                            <h3>Building useful things with care.</h3>
+                        </div>
+                        <span class="cv-page-number">01</span>
+                    </header>
+                    <div class="cv-paper-grid">
+                        <div>
+                            <h4>Profile</h4>
+                            <p>Student developer with a practical, people-first approach to software. I enjoy the space where a clear design meets a dependable implementation.</p>
+                            <h4>Toolkit</h4>
+                            <ul class="cv-tags" aria-label="Technical skills">
+                                <li>JavaScript</li><li>React</li><li>HTML / CSS</li><li>WordPress</li><li>Git</li>
+                            </ul>
+                        </div>
+                        <aside class="cv-margin-note">
+                            <strong>Looking for</strong>
+                            <p>Junior software roles, thoughtful freelance briefs, and kind teams who enjoy sharing what they know.</p>
+                        </aside>
+                    </div>
+                </article>
+
+                <article class="cv-paper" id="cv-page-2" tabindex="0" data-cv-panel="2" hidden>
+                    <button class="cv-peel cv-peel--prev" type="button" data-cv-direction="prev" aria-label="Previous CV page">
+                        <span aria-hidden="true">&#8592;</span>
+                    </button>
+                    <button class="cv-peel cv-peel--next" type="button" data-cv-direction="next" aria-label="Next CV page">
+                        <span aria-hidden="true">&#8594;</span>
+                    </button>
+                    <div class="cv-paper-pin pin" aria-hidden="true"><span class="pin-head"></span><span class="pin-stem"></span></div>
+                    <header class="cv-paper-header">
+                        <div>
+                            <p class="cv-kicker">Selected work · 2024—now</p>
+                            <h3>A few things I’ve made.</h3>
+                        </div>
+                        <span class="cv-page-number">02</span>
+                    </header>
+                    <div class="cv-timeline">
+                        <div class="cv-entry">
+                            <p class="cv-date">2025—now</p>
+                            <div>
+                                <h4>Independent developer</h4>
+                                <p>Designing small web experiences, learning in public, and turning rough ideas into polished prototypes.</p>
+                                <a href="projects.html#projects">See the project board <span aria-hidden="true">↗</span></a>
+                            </div>
+                        </div>
+                        <div class="cv-entry">
+                            <p class="cv-date">2024</p>
+                            <div>
+                                <h4>Portfolio website</h4>
+                                <p>Built this pinboard-inspired portfolio from pure HTML, CSS, and JavaScript, with motion and accessibility in mind.</p>
+                                <a href="projects.html#projects">Open the project note <span aria-hidden="true">↗</span></a>
+                            </div>
+                        </div>
+                        <div class="cv-entry">
+                            <p class="cv-date">Next</p>
+                            <div>
+                                <h4>More to come</h4>
+                                <p>Currently exploring component systems, creative coding, and better ways to make digital tools feel welcoming.</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="cv-pagination">
+                <span id="cv-status" aria-live="polite">Page 1 of 2</span>
+            </div>
+        </section>
     </main>
 
     <script src="script.js"></script>

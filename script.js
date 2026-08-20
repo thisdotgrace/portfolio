@@ -14,6 +14,81 @@
   }
 
   /* -----------------------------------------------------
+     ABOUT PAGE CV PAGER
+  ----------------------------------------------------- */
+  const cvPanels = document.querySelectorAll('[data-cv-panel]');
+  const cvStatus = document.getElementById('cv-status');
+  const cvArrows = document.querySelectorAll('[data-cv-direction]');
+
+  if (cvPanels.length && cvStatus && cvArrows.length) {
+    const cvPinLiftDuration = 180;
+    const cvPaperDuration = 320;
+    const cvPinSettleDuration = 180;
+    let currentCvPage = 1;
+    let isCvChanging = false;
+
+    function nextCvPage(direction) {
+      const pageNumber = currentCvPage + direction;
+      return pageNumber < 1 ? cvPanels.length : pageNumber > cvPanels.length ? 1 : pageNumber;
+    }
+
+    function showCvPage(pageNumber, direction) {
+      if (isCvChanging || pageNumber === currentCvPage) return;
+
+      const outgoing = [...cvPanels].find(panel => Number(panel.dataset.cvPanel) === currentCvPage);
+      const incoming = [...cvPanels].find(panel => Number(panel.dataset.cvPanel) === pageNumber);
+      if (!outgoing || !incoming) return;
+
+      isCvChanging = true;
+      const movement = direction || (pageNumber > currentCvPage ? 'next' : 'prev');
+      const outgoingPin = outgoing.querySelector('.cv-paper-pin');
+      const incomingPin = incoming.querySelector('.cv-paper-pin');
+
+      if (outgoingPin) outgoingPin.classList.add('cv-pin--lifting');
+
+      setTimeout(() => {
+        incoming.hidden = false;
+        outgoing.classList.add('cv-paper--leaving', `cv-paper--${movement}`);
+        incoming.classList.add('cv-paper--entering', `cv-paper--${movement}`);
+
+        if (incomingPin) {
+          incomingPin.classList.add('cv-pin--landing');
+        }
+      }, cvPinLiftDuration);
+
+      setTimeout(() => {
+        if (incomingPin) incomingPin.classList.remove('cv-pin--landing');
+      }, cvPinLiftDuration + cvPaperDuration);
+
+      setTimeout(() => {
+        outgoing.hidden = true;
+        outgoing.classList.remove('cv-paper--active', 'cv-paper--leaving', `cv-paper--${movement}`);
+        incoming.classList.remove('cv-paper--entering', `cv-paper--${movement}`);
+        incoming.classList.add('cv-paper--active');
+        if (outgoingPin) outgoingPin.classList.remove('cv-pin--lifting');
+        isCvChanging = false;
+      }, cvPinLiftDuration + cvPaperDuration + cvPinSettleDuration);
+
+      currentCvPage = pageNumber;
+      cvStatus.textContent = `Page ${currentCvPage} of ${cvPanels.length}`;
+    }
+
+    cvArrows.forEach(arrow => {
+      arrow.addEventListener('click', () => {
+        const direction = arrow.dataset.cvDirection === 'next' ? 1 : -1;
+        showCvPage(nextCvPage(direction), direction === 1 ? 'next' : 'prev');
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      if (!event.target.closest('.cv-paper')) return;
+      const direction = event.key === 'ArrowRight' ? 1 : -1;
+      showCvPage(nextCvPage(direction), direction === 1 ? 'next' : 'prev');
+    });
+  }
+
+  /* -----------------------------------------------------
      PROJECT NOTE -> MODAL (with pin fly-out/fly-back)
   ----------------------------------------------------- */
   const overlay = document.getElementById('noteModalOverlay');
