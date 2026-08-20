@@ -1,0 +1,318 @@
+/* -----------------------------------------------------
+   SHARED RESET, BASE, FONTS, VARIABLES
+----------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body { height: 100%; }
+
+body {
+  font-family: 'PatrickHand', sans-serif;
+  line-height: 1.45;
+  color: #222;
+  background: url('../assets/background.png') center/cover no-repeat fixed;
+  cursor: url('../assets/cursor.png') 8 8, auto;
+}
+
+body.page-home { background-image: url('../assets/backgrounds/home.png'); }
+body.page-projects { background-image: url('../assets/backgrounds/projects.png'); }
+body.page-about { background-image: url('../assets/backgrounds/about.png'); }
+
+a:hover,
+a:focus-visible,
+button:hover,
+button:focus-visible {
+  cursor: url('../assets/click.png') 8 8, pointer;
+}
+
+h3 { font-family: 'AnkaCoderRegular', sans-serif; }
+
+@font-face {
+  font-family: 'AnkaCoderRegular';
+  src: url('../assets/fonts/AnkaCoder-b.ttf');
+}
+
+@font-face {
+  font-family: 'PatrickHand';
+  src: url('../assets/fonts/PatrickHand-Regular.ttf');
+}
+
+:root {
+  --note-yellow: #fff1b8;
+  --note-blue: #48bfe9;
+  --note-orange: #ff8b3e;
+  --note-green: #7ad27c;
+  --note-gold: #fec919;
+  --tape-gray: #dbd8be;
+  --tape-edge-gray: #b7b49d;
+  --note-w-default: 220px;
+  --note-h-default: auto;
+  --note-rot-default: 0deg;
+  --pin-head-gradient: radial-gradient(circle at 30% 30%, #ff6b6b, #d93b3b);
+  --polaroid-border: #fff;
+  --polaroid-shadow: #dadada;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0.75rem;
+}
+
+/* -----------------------------------------------------
+   SHARED HEADER AND NAVIGATION
+----------------------------------------------------- */
+.site-header {
+  background-color: #7ad27c;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-family: 'AnkaCoderRegular';
+}
+
+.header-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  grid-template-areas: "logo navtoggle" "nav nav";
+  gap: 0.4rem 0.75rem;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.logo {
+  grid-area: logo;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-toggle {
+  grid-area: navtoggle;
+  display: inline-block;
+  background: transparent;
+  border: 0;
+  padding: 0.25rem;
+  cursor: url('../assets/cursor.png') 8 8, pointer;
+  justify-self: end;
+}
+
+.nav-toggle:focus { outline: 2px solid rgba(0,0,0,0.12); border-radius: 4px; }
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  width: 26px;
+  height: 2px;
+  background: #222;
+  content: '';
+  display: block;
+  position: relative;
+}
+
+.hamburger::before { position: absolute; top: -7px; }
+.hamburger::after { position: absolute; top: 7px; }
+
+#primary-nav { grid-area: nav; display: none; width: 100%; }
+#primary-nav.open { display: block; }
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: inherit;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.main-nav a:hover,
+.main-nav a:focus { background: rgba(255,255,255,0.2); }
+
+.main-nav a.active,
+.main-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* -----------------------------------------------------
+   SHARED POST-IT, PIN, AND POLAROID PRIMITIVES
+----------------------------------------------------- */
+.post-it-note {
+  --note-bg: var(--note-yellow);
+  --note-w: var(--note-w-default);
+  --note-h: var(--note-h-default);
+  --note-rot: var(--note-rot-default);
+  position: relative;
+  padding: 0.75rem;
+  background-color: transparent;
+  transform: rotate(var(--note-rot));
+  width: var(--note-w);
+  height: var(--note-h);
+  transition: transform 220ms ease;
+}
+
+.post-it-note::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--note-bg);
+  pointer-events: none;
+  transition: clip-path 260ms ease;
+}
+
+.post-it-note > .pin { z-index: 2; }
+
+.pin {
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.pin-head {
+  width: 18px;
+  height: 18px;
+  background: var(--pin-head-gradient);
+  border-radius: 50%;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+}
+
+.pin-stem {
+  width: 2px;
+  height: 12px;
+  background: linear-gradient(#e6e6e6, #bdbdbd);
+  margin-top: 2px;
+  border-radius: 1px;
+}
+
+.polaroid {
+  position: relative;
+  background-color: var(--polaroid-border);
+  padding: 0.75rem 0.75rem 1.75rem;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 2px 2px 3px var(--polaroid-shadow);
+  border-radius: 4px;
+  transform: rotate(3deg);
+  z-index: 2;
+  cursor: url('../assets/click.png') 8 8, grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.polaroid:active { cursor: url('../assets/click.png') 8 8, grabbing; }
+.polaroid > .pin { top: -10px; transition: opacity 120ms ease; }
+.polaroid.shaking > .pin { opacity: 0; }
+
+.polaroid-img {
+  width: 4.5rem;
+  display: block;
+  object-fit: cover;
+  border: 6px solid #fff;
+  background-color: black;
+  transition: opacity 160ms ease;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.polaroid-img.swapping { opacity: 0; }
+
+@keyframes polaroid-shake {
+  0% { transform: translate(0, 0) rotate(3deg); }
+  10% { transform: translate(-6px, 2px) rotate(-7deg); }
+  20% { transform: translate(6px, -2px) rotate(7deg); }
+  30% { transform: translate(-7px, 3px) rotate(-9deg); }
+  40% { transform: translate(7px, -3px) rotate(9deg); }
+  50% { transform: translate(-6px, 2px) rotate(-7deg); }
+  60% { transform: translate(6px, -2px) rotate(7deg); }
+  70% { transform: translate(-4px, 1px) rotate(-5deg); }
+  80% { transform: translate(4px, -1px) rotate(5deg); }
+  90% { transform: translate(-2px, 0) rotate(-2deg); }
+  100% { transform: translate(0, 0) rotate(3deg); }
+}
+
+.polaroid.shaking { animation: polaroid-shake 650ms ease; }
+
+.polaroid figcaption {
+  margin-top: 0.5rem;
+  color: #222;
+  text-align: center;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+
+.notebook-sheet {
+  position: relative;
+  background: #fff url('../assets/lined-paper-bg.png') repeat-y;
+  background-size: contain;
+  border: 1px solid #ddd;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  padding: 2rem 2rem 2.5rem 3rem;
+  border-radius: 6px;
+  max-width: 700px;
+  transform: rotate(-1.2deg);
+}
+
+.notebook-sheet::before {
+  content: '';
+  position: absolute;
+  left: 2.2rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 90, 90, 0.7);
+}
+
+.notebook-lines p { margin-bottom: 0.75rem; }
+
+/* -----------------------------------------------------
+   SHARED NOTE COLORS AND RESPONSIVE BASE
+----------------------------------------------------- */
+.note-yellow { --note-bg: var(--note-yellow); }
+.note-pink { --note-bg: #ffd6e0; }
+.note-blue { --note-bg: var(--note-blue); }
+.note-green { --note-bg: var(--note-green); }
+.note-orange { --note-bg: #f09c00; }
+.note-gold { --note-bg: var(--note-gold); }
+.note-purple { --note-bg: #c39bd3; }
+.note-greenyellow { --note-bg: #d7f24c; }
+.note-rot-1left { --note-rot: -2deg; }
+.note-rot-2left { --note-rot: -4deg; }
+
+@media (min-width: 480px) {
+  :root { --note-w-default: 300px; }
+  .polaroid-img { width: 12rem; }
+}
+
+@media (min-width: 700px) {
+  :root { --note-w-default: 400px; }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.25rem;
+  }
+
+  .header-inner { display: flex; align-items: center; justify-content: space-between; }
+  .nav-toggle { display: none; }
+  #primary-nav { display: block; }
+  .main-nav ul { flex-direction: row; gap: 1rem; justify-content: flex-end; }
+  .logo { flex-shrink: 0; font-size: 1.25rem; }
+  .polaroid { display: inline-block; }
+  .polaroid-img { width: 14rem; }
+}

@@ -20,7 +20,7 @@ A small portfolio site built with plain HTML, CSS and JavaScript. The design use
    - Use VS Code Live Server extension (recommended) to serve it and get live reload.
 
 ## File overview
-- `index.html` — main HTML structure and small scripts (nav toggle, scroll wobble)
+- `html/` — page markup for the home, projects, and about views
 - `style1.css` (or `style.css`) — primary stylesheet with tokens, post-it, polaroid, grid and notebook styles
 - `assets/` — images and icons (avatar, social icons, sticker icons)
 - `test.css` — auxiliary/test styles (if present)
